@@ -17,10 +17,14 @@ import android.hardware.SensorListener;
 public class iPhone4 extends Service
 {
 
+	SensorManager sm;
+
+	SensorListener sl;
+
 	@Override
 	public void onCreate() {
 
-		SensorListener sl = new SensorListener() {
+		sl = new SensorListener() {
 			public void onSensorChanged(int sensor, float[] values) {
 
 				float pitch = values[1];
@@ -55,7 +59,7 @@ public class iPhone4 extends Service
 					intent_broadcast.putExtra("state", !isEnabled);
 
 				iPhone4.this.sendBroadcast(intent_broadcast);
-			
+		
 			}
  
 			public void onAccuracyChanged(int sensor, int accuracy) {
@@ -63,7 +67,6 @@ public class iPhone4 extends Service
 		};
 
 
-		SensorManager sm;
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
  
 		// Register your SensorListener
@@ -75,7 +78,17 @@ public class iPhone4 extends Service
 
 	@Override
     public void onDestroy() {
-    
+		sm.unregisterListener(sl);    
+
+		Settings.System.putInt(
+				      iPhone4.this.getContentResolver(),
+		    		  Settings.System.AIRPLANE_MODE_ON, 0);
+
+		Intent intent_broadcast = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+					intent_broadcast.putExtra("state", false);
+
+				iPhone4.this.sendBroadcast(intent_broadcast);
+
 	}
 
 

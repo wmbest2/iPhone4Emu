@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.wmbest.iphone4"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <application android:label="@string/app_name">
-        <service android:name="iPhone4"
-                  android:label="@string/app_name">
-        </service>
+      android:versionCode="5"
+      android:versionName="1.4">
+	  <application android:label="@string/app_name" android:icon="@drawable/androidapp">
+		  <activity android:name="iPhone4Launcher" android:label="iPhone 4 Emulator">
+			  <intent-filter>
+				  <action android:name="android.intent.action.MAIN" />
+				  <category android:name="android.intent.category.LAUNCHER" />
+			  </intent-filter>
+		</activity>
+        <service android:name="iPhone4" />
+		<receiver android:name="iPhone4Receiver">
+			<intent-filter>
+				<action android:name="com.wmbest.iphone4.toggle_on"/>
+				<action android:name="com.wmbest.iphone4.toggle_off"/>
+			</intent-filter>
+		</receiver>
 	</application>
 	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+	<uses-sdk android:minSdkVersion="3" />
 </manifest> 
