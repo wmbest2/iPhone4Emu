@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.Button;
+import android.view.View;
+import com.admob.android.ads.AdView;
 
 public class iPhone4Launcher extends Activity {
 
@@ -12,8 +14,9 @@ public class iPhone4Launcher extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-	    Intent intent = new Intent("com.wmbest.iphone4.toggle_on");
-		sendbroadcast(intent);
+		AdView ad = (AdView) findViewById(R.id.ad);
+		ad.setVisibility(VISIBLE);
+
 
 		Button on = (Button) findViewById(R.id.on);
         Button off = (Button) findViewById(R.id.off);
@@ -21,14 +24,14 @@ public class iPhone4Launcher extends Activity {
 		on.setOnClickListener(new View.OnClickListener() {
             public void onClick(View aView) {
                 Intent intent = new Intent("com.wmbest.iphone4.toggle_on");
-				iPhone4Launcher.this.sendbroadcast(intent);
+				iPhone4Launcher.this.sendBroadcast(intent);
             }
         });
 
         off.setOnClickListener(new View.OnClickListener() {
             public void onClick(View aView) {
                Intent intent = new Intent("com.wmbest.iphone4.toggle_off");
-				iPhone4Launcher.this.sendbroadcast(intent);
+				iPhone4Launcher.this.sendBroadcast(intent);
             }
         });
 		

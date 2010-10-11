@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.Button;
 import android.view.View;
+import com.admob.android.ads.AdView;
 
 public class iPhone4Launcher extends Activity {
 
@@ -12,6 +13,10 @@ public class iPhone4Launcher extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		AdView ad = (AdView) findViewById(R.id.ad);
+		ad.setVisibility(View.VISIBLE);
+
 
 		Button on = (Button) findViewById(R.id.on);
         Button off = (Button) findViewById(R.id.off);
